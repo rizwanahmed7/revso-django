@@ -1,0 +1,74 @@
+{% extends 'index.html' %}
+{% block title %} {% endblock title %}
+{% block body %}
+{% load static %}
+
+<div class="wrapper">
+       
+
+  <div class="content-page">
+    <div class="content">
+ 
+    
+  <div class="container-fluid">
+                         
+     {% for message in messages %}
+     <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+ 
+       {% if message.tags == "success" %}
+       <strong>Well done!</strong> {{ message}}
+       {% else %}
+       <strong>Error!</strong> {{ message}}
+       {% endif %}
+ 
+     </div>
+     {% endfor %}
+                         <!-- start page title -->
+                         <div class="row">
+                             <div class="col-12">
+                                 <div class="page-title-box">
+                                     <div class="page-title-right">
+                                         <ol class="breadcrumb m-0">
+                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                                             <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
+                                             <li class="breadcrumb-item active">Supplier</li>
+                                         </ol>
+                                     </div>
+                                     <h4 class="page-title">INFO</h4>
+                                 </div>
+                             </div>
+                         </div>     
+                         <!-- end page title --> 
+ 
+                         <div class="row">
+                             <div class="col-12">
+                                 <div class="card">
+                                     <div class="card-body">
+                                         <div class="row mb-2">
+                                             <div class="col-sm-4">
+                                                {% comment %} <a class="btn btn-danger mb-2" href="{% url 'rept'  %}" ><i class="mdi mdi-plus-circle me-2"></i> Add Receipt</a>
+  {% endcomment %}
+                                                    </div>
+                                         
+                                         </div>
+                 
+                                         <div class="table-responsive">
+                                             <p>After being in the educational system as a student for quite a long time, it became apparent that our school has difficulty tracking student revision. I investigated this further and after investigation and getting in contact with numerous schools, it became clear that many other schools face the same problems. If a more computational method were used in this situation, a system could be created that routinely checks the activities of students and will be able to keep track of what they need to be studying and when they need to be studying by providing them a schedule.
+                                                Stakeholders
+                                                The main demographic for my system will be students and teachers. Students are the main stakeholders of this system because they are the primary users and will be the ones who benefit the most from its features, it is designed to help students revise and study for exams and tests which is a crucial aspect of their education.</p>
+                                         </div>
+                                     </div> <!-- end card-body-->
+                                 </div> <!-- end card-->
+                             </div> <!-- end col -->
+                         </div>
+                         <!-- end row -->        
+                         
+                     </div> <!-- container -->
+ 
+                 </div> <!-- content -->
+ 
+ </div>
+ </div>
+ </div>
+
+{% endblock body %}

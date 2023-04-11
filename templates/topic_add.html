@@ -1,0 +1,152 @@
+{% extends 'index.html' %}
+{% block title %} Topic{% endblock title %}
+{% block body %}
+{% load static %}
+
+<div class="wrapper">
+       
+
+    <div class="content-page">
+        <div class="content">
+
+            <div class="container-fluid">
+                        
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tasks</a></li>
+                                    <li class="breadcrumb-item active">Add IME </li>
+                                </ol>
+                            </div>
+                            <h2 class="page-title">Add IME</h2>
+                        </div>
+                    </div>
+                </div>     
+                <!-- end page title --> 
+
+                <div class="row">
+                    <div class="col-xxl-8 col-xl-7">
+                        <!-- project card -->
+                        <div class="card d-block">
+                          <div class="card-body">
+                            <form action="" method="post" name="reg" role="form"    enctype="multipart/form-data">
+                                {% csrf_token %}
+    
+                              
+                                     {% if IME %}
+                                   
+                            
+                                     {% comment %} <select class="form-select" id="status-select" name='supplername'>
+                                         {% for  su in suppliers  %}
+                                         <option value={{ su.id}} >{{su.first_name}}</option>
+                                        
+                                         {% endfor %}
+                                     </select> 
+                                   {% endcomment %}
+                                
+                                 <label>IME Number:</label>
+                                 <input type="text" class="form-control" name="ime" id="subtype" value ={{IME.IME_number}} placeholder="SubType Name" required>
+                                   </br>
+                              
+     
+                         
+                                           
+                                    <button type="submit" class="btn btn-danger">Update</button>
+                                </form> 
+
+
+                         {% else %} 
+
+                            <form action="" method="post" name="reg" role="form"    enctype="multipart/form-data">
+                                {% csrf_token %}
+    
+
+                                <label>Add Subject:</label>
+                            
+                                <select class="form-select" id="status-select" name='subject'>
+                                    {% for  sb in subject %}
+                                    <option value={{sb.Subject_name}} >{{sb.Subject_name}}</option>
+                                
+                                    {% endfor %}
+                                </select> 
+                             
+                              </br>
+
+                             
+                           
+                            <label>Topic:</label>
+                            <input type="text" class="form-control" name="topic" id="i" placeholder="SubType Name">
+                    </br>
+                                    
+                    <label>Content:</label>
+                    <textarea id="w3review" class="form-control" name="content" rows="4" cols="50">
+                    </textarea>
+            </br>
+                    
+
+                    
+                            <button type="submit" class="btn btn-danger">ADD Topic</button>
+                                
+
+
+
+
+                              
+                        </div> <!-- end card-->
+
+                    
+                     </div>
+                        
+                      </form>
+
+                      {% endif %}
+                   
+
+                      {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                  
+                        {% if message.tags == "success" %}
+                        <strong>Well done!</strong> {{ message}}
+                        {% else %}
+                        <strong>Error!</strong> {{ message}}
+                        {% endif %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                      {% endfor %}
+   
+                    </div>
+                    </div>
+                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+
+                            function addOption() {
+                                // Get a reference to the select element
+                                var select = document.getElementById("mySelect");
+                              
+                                // Create a new option element
+                                var option = document.createElement("option");
+                                var ime_num =  document.getElementById("ime");
+                               
+                              
+
+                                // Set the text and value of the option element
+                                option.text = ime_num.value + (select.length + 1);
+                                option.value = ime_num.value + (select.length + 1);
+                              
+                                // Add the option element to the select element
+                                select.add(option);
+                              
+                           
+                              }
+                              
+                           
+                        </script>
+{% endblock body %}

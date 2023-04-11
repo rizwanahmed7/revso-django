@@ -1,0 +1,155 @@
+{% extends 'index.html' %}
+{% block title %} {% endblock title %}
+{% block body %}
+{% load static %}
+
+<div class="wrapper">
+       
+
+  <div class="content-page">
+    <div class="content">
+ 
+    
+  <div class="container-fluid">
+                         
+     {% for message in messages %}
+     <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+ 
+       {% if message.tags == "success" %}
+       <strong>Well done!</strong> {{ message}}
+       {% else %}
+       <strong>Error!</strong> {{ message}}
+       {% endif %}
+ 
+     </div>
+     {% endfor %}
+                         <!-- start page title -->
+                         <div class="row">
+                             <div class="col-12">
+                                 <div class="page-title-box">
+                                     <div class="page-title-right">
+                                         <ol class="breadcrumb m-0">
+                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                                             <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
+                                             <li class="breadcrumb-item active">Supplier</li>
+                                         </ol>
+                                     </div>
+                                     <h4 class="page-title">Revision</h4>
+                                 </div>
+                             </div>
+                         </div>     
+                         <!-- end page title --> 
+ 
+                         <div class="row">
+                             <div class="col-12">
+                                 <div class="card">
+                                     <div class="card-body">
+                                         <div class="row mb-2">
+                                             <div class="col-sm-4">
+                                                {% comment %} <a class="btn btn-danger mb-2" href="{% url 'rept'  %}" ><i class="mdi mdi-plus-circle me-2"></i> Add Receipt</a>
+  {% endcomment %}
+                                                    </div>
+                                         
+                                         </div>
+                 
+                                         <div class="table-responsive">
+                                            <h1>Revision Page</h1>
+                                            <button class="btn btn-success" id="start-timer">Start Timer</button>
+                                            <button class="btn btn-success" id="stop-timer">Stop Timer</button>
+                                         </br>
+                                            <div style=' color:black; font-weight:bold;' id="timer"></div>           </div>
+                                     </div> <!-- end card-body-->
+                                 </div> <!-- end card-->
+                             </div> <!-- end col -->
+                         </div>
+                         <!-- end row -->        
+                         
+                     </div> <!-- container -->
+ 
+                 </div> <!-- content -->
+ 
+ </div>
+ </div>
+ </div>
+
+       
+        <script>
+          var startTime = null;
+          var elapsedTime = 0;
+          var timerInterval = null;
+      
+          function startTimer() {
+            startTime = Date.now();
+            timerInterval = setInterval(updateTimer, 1000);
+          }
+      
+          function stopTimer() {
+            clearInterval(timerInterval);
+            elapsedTime = Date.now() - startTime;
+            submitTime(elapsedTime);
+          }
+      
+          function updateTimer() {
+            var currentTime = Date.now();
+            var timeDiff = currentTime - startTime;
+            var minutes = Math.floor(timeDiff / (1000 * 60));
+            var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            document.getElementById("timer").innerHTML = "Time Elapsed: " + minutes + "m " + seconds + "s";
+          }
+      
+          function submitTime(time) {
+            // Use AJAX to submit time to Django view
+            $.ajax({
+              url: "/submit_time/",
+              method: "POST",
+              data: {time: time},
+              success: function(data) {
+                alert("Time submitted successfully");
+              }
+            });
+          }
+      
+          document.getElementById("start-timer").addEventListener("click", startTimer);
+          document.getElementById("stop-timer").addEventListener("click", stopTimer);
+        </script>
+    <script>
+      var startTime = null;
+      var elapsedTime = 0;
+      var timerInterval = null;
+  
+      function startTimer() {
+        startTime = Date.now();
+        timerInterval = setInterval(updateTimer, 1000);
+      }
+  
+      function stopTimer() {
+        clearInterval(timerInterval);
+        elapsedTime = Date.now() - startTime;
+        submitTime(elapsedTime);
+      }
+  
+      function updateTimer() {
+        var currentTime = Date.now();
+        var timeDiff = currentTime - startTime;
+        var minutes = Math.floor(timeDiff / (1000 * 60));
+        var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        document.getElementById("timer").innerHTML = "Time Elapsed: " + minutes + "m " + seconds + "s";
+      }
+  
+      function submitTime(time) {
+        // Use AJAX to submit time to Django view
+        $.ajax({
+          url: "/submit_time/",
+          method: "POST",
+          data: {time: time},
+          success: function(data) {
+            alert("Time submitted successfully");
+          }
+        });
+      }
+  
+      document.getElementById("start-timer").addEventListener("click", startTimer);
+      document.getElementById("stop-timer").addEventListener("click", stopTimer);
+    </script>
+
+{% endblock body %}

@@ -1,0 +1,202 @@
+{% extends 'index.html' %}
+{% block title %} {% endblock title %}
+{% block body %}
+{% load static %}
+
+<div class="wrapper">
+       
+
+  <div class="content-page">
+    <div class="content">
+ 
+    
+  <div class="container-fluid">
+                         
+     {% for message in messages %}
+     <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+ 
+       {% if message.tags == "success" %}
+       <strong>Well done!</strong> {{ message}}
+       {% else %}
+       <strong>Error!</strong> {{ message}}
+       {% endif %}
+ 
+     </div>
+     {% endfor %}
+                         <!-- start page title -->
+                         <div class="row">
+                             <div class="col-12">
+                                 <div class="page-title-box">
+                                     <div class="page-title-right">
+                                         <ol class="breadcrumb m-0">
+                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                                             <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
+                                             <li class="breadcrumb-item active">Home</li>
+                                         </ol>
+                                     </div>
+                                     <h4 class="page-title">Home</h4>
+                                 </div>
+                             </div>
+                         </div>     
+                         <!-- end page title --> 
+ 
+                         <div class="row">
+                             <div class="col-12">
+                                 <div class="card">
+                                     <div class="card-body">
+                                         <div class="row mb-2">
+                                             <div class="col-sm-2">
+                                                <a class="btn btn-danger mb-2" href="/show_subject" > Subject_list</a>
+                                                   
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <a class="btn btn-warning mb-2" href="/info" > INFO</a>
+         
+                                                            </div>
+                                                            
+                                                    
+                                                    
+                                             <div class="col-sm-6">
+                                               
+                                                <form method="get" action="{% url 'search' %}">
+                                                    <div class="input-group">
+                                                        <input type="text" name="q"   placeholder="Search..." >
+                                                     
+                                                        <button   class="input-group-text btn-primary" type="submit">Search</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                                <div class="col-sm-2">
+                                              
+                                                    <div class="text-sm-end">
+                                                         <a type='button' class="btn btn-success"  href='/revision' >Time Revsion</a>
+                                                    </div>
+                                                </div><!-- end col-->
+                                            </div>
+                    
+                                                
+                                         </div>
+                 
+                                     </div>
+                                     <div class="table-responsive">
+                                        <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th class="all" style="width: 20px;">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="customCheck1">
+                                                            <label class="form-check-label" for="customCheck1">&nbsp;</label>
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">#</th>
+                                                        <th scope="col">Subject</th>
+                                                        
+                                                           <th scope="col">Action</th>
+                                                 
+                                                           
+                                                </tr>
+                                            </thead>
+                                            {% if results %}
+                                            {% for sub in results %}
+
+                                            <tbody>
+                                               <tr>
+                                                   <td>
+                                                       <div class="form-check">
+                                                           <input type="checkbox" class="form-check-input" id="customCheck2">
+                                                           <label class="form-check-label" for="customCheck2">&nbsp;</label>
+                                                       </div>
+                                                   </td>
+                                                
+                                                   <td>{{ forloop.counter}}</td>
+                                                   <td>{{ sub.Subject_name}}</td>
+                                                   
+                                                   
+                                                     
+                                   
+                                                  
+                                                   <td class="table-action">
+                                                             <a href="" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                                   </td>
+
+                                                  
+
+
+                                                  
+                                                  
+                                               
+                                            
+                                               </tr>
+                                               
+                                               
+                                           </tbody>
+                                           {% endfor %}
+                                            {% else %}
+                                        
+                                            
+                                              {% for sub in subject %}
+                                            
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" id="customCheck2">
+                                                            <label class="form-check-label" for="customCheck2">&nbsp;</label>
+                                                        </div>
+                                                    </td>
+                                                 
+                                                    <td>{{ forloop.counter}}</td>
+                                                    <td><a href="{% url 'show_topic' sub.id  %}">{{ sub.Subject_name}}</td></a>
+                                                   
+                                                    
+                                                      
+                                    
+                                                   
+                                                    <td class="table-action">
+                                                              <a href="" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                                    </td>
+
+                                                   
+
+
+                                                   
+                                                   
+                                                
+                                             
+                                                </tr>
+                                                
+                                                
+                                            </tbody>
+                                          
+                                            {% endfor %}
+                                            {% endif %}
+                                        </table>
+                                    </div>
+                                
+                             </div> <!-- end col -->
+                         </div>
+                         <!-- end row -->        
+                         
+                     </div> <!-- container -->
+ 
+                 </div> <!-- content -->
+ 
+ </div>
+ </div>
+ </div>
+
+ 
+
+
+   
+
+
+
+
+    
+    
+
+
+{% endblock body %}

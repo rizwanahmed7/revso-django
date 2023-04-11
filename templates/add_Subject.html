@@ -1,0 +1,108 @@
+{% extends 'index.html' %}
+{% block title %} FormPage {% endblock title %}
+{% block body %}
+{% load static %}
+  
+<div class="wrapper">
+       
+
+    <div class="content-page">
+      <div class="content">
+        <div class="container-fluid">
+                           
+                           <!-- start page title -->
+                           <div class="row">
+                               <div class="col-12">
+                                   <div class="page-title-box">
+                                       <div class="page-title-right">
+                                           
+                                       </div>
+                                       <h4 class="page-title">Subject Form</h4>
+                                   </div>
+                               </div>
+                           </div> 
+                           
+                           <div class="row">
+                               <div class="col-12">
+                                   <div class="card">
+                                       <div class="card-body">
+                                           {% if supplier %}
+                                     
+                                           
+                                           <form action="" method="post" autocomplete="off"  enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                              <div class="form-group">
+                                                  <label style='font-weight:bold;'>FirstName</label>
+                                                  <input type="text" class="form-control" name="firstname" id="username" value={{supplier.first_name}} required>
+                                                </div>
+                                              </br>
+                                                <div class="form-group">
+                                                  <label style='font-weight:bold;'>LastName</label>
+                                                  <input type="text" class="form-control" name="lastname" id="username"  value={{supplier.last_name}} required>
+                                                </div>
+                                              </br>
+                                              
+                                                <div class="form-group">
+                                                  <label style='font-weight:bold;'>Email</label>
+                                                  <input  type="email" class="form-control" name="email" id="username" value={{supplier.email}} required>
+                                                </div>
+                                              </br>
+                                             
+                                                <div class="form-group">
+                                                  <label style='font-weight:bold;'>Phone number</label>
+                                                  <input type="text" class="form-control" name="ph" id="email"  value={{supplier.phone_no}} required>
+                                                </div> 
+                                              </br>
+                                               
+                            
+                               <div class="p-t-20">
+                                  <button class="btn btn-primary" type="submit">Update Supplier</button>
+                                      </div>
+                                      
+                                 
+                                                </form>
+
+                            {% else %} 
+                <form action="" method="post" autocomplete="off"  enctype="multipart/form-data">
+                  {% csrf_token %}
+                    <div class="form-group">
+                        <label style='font-weight:bold;'>Subject_Name</label>
+                        <input type="text" class="form-control" name="sname" id="username" required>
+                      </div>
+                    </br>
+                      <div class="form-group">
+                        <label style='font-weight:bold;'>Discription</label>
+                        <input type="text" class="form-control" name="discp" id="username" required>
+                      </div>
+                    </br>
+                    
+                  
+                     
+  
+     <div class="p-t-20">
+        <button class="btn btn-primary" type="submit">Add Subject</button>
+            </div>
+            
+       
+                      </form>
+                      {% endif %}
+    {% for message in messages %}
+                           <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                       
+                             {% if message.tags == "success" %}
+                             <strong>Well done!</strong> {{ message}}
+                             {% else %}
+                             <strong>Error!</strong> {{ message}}
+                             {% endif %}
+                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                           </div>
+                           {% endfor %}
+</div>
+</div>
+</div>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
